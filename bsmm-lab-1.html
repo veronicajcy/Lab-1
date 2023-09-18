@@ -6,7 +6,8 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
-<meta name="author" content="Add your name here">
+<meta name="author" content="Siyao Jiang">
+<meta name="dcterms.date" content="2024-06-09">
 
 <title>BSMM-lab-1</title>
 <style>
@@ -3035,14 +3036,14 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Author</div>
     <div class="quarto-title-meta-contents">
-             <p>Add your name here </p>
+             <p>Siyao Jiang </p>
           </div>
   </div>
     
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">Invalid Date</p>
+      <p class="date">June 9, 2024</p>
     </div>
   </div>
   
@@ -3056,7 +3057,11 @@ vertical-align: -.125em;
 <h2 class="anchored" data-anchor-id="setup">Setup</h2>
 <p>Load packages and data:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(Lahman)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">dim</span>(Teams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 3015   48</code></pre>
+</div>
 </div>
 </section>
 <section id="exercises" class="level2">
@@ -3064,7 +3069,7 @@ vertical-align: -.125em;
 <section id="exercise-1" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-1">Exercise 1</h3>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(Teams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">glimpse</span>(Teams)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>Rows: 3,015
 Columns: 48
@@ -3118,31 +3123,150 @@ $ teamIDlahman45 &lt;chr&gt; &quot;BS1&quot;, &quot;CH1&quot;, &quot;CL1&quot;, 
 $ teamIDretro    &lt;chr&gt; &quot;BS1&quot;, &quot;CH1&quot;, &quot;CL1&quot;, &quot;FW1&quot;, &quot;NY2&quot;, &quot;PH1&quot;, &quot;RC1&quot;, &quot;TRO&quot;,…</code></pre>
 </div>
 </div>
-<p>The <code>Teams</code> dataset has ___ observations and ___ variables.</p>
+<p>The <code>Teams</code> dataset has 3015 observations and 48 variables.</p>
 </section>
 <section id="exercise-2" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-2">Exercise 2</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>mets <span class="ot">&lt;-</span> Teams  <span class="sc">|&gt;</span> </span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(teamID <span class="sc">==</span> <span class="st">&quot;NYN&quot;</span>)</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>my_mets <span class="ot">&lt;-</span> mets <span class="sc">|&gt;</span> </span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(yearID <span class="sc">%in%</span> <span class="dv">2004</span><span class="sc">:</span><span class="dv">2012</span>) <span class="sc">|&gt;</span> </span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(yearID,G,W,L)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>my_mets</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID   G  W  L
+1   2004 162 71 91
+2   2005 162 83 79
+3   2006 162 97 65
+4   2007 162 88 74
+5   2008 162 89 73
+6   2009 162 70 92
+7   2010 162 79 83
+8   2011 162 77 85
+9   2012 162 74 88</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-3" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-3">Exercise 3</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="ot">&lt;-</span> Teams <span class="sc">|&gt;</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">select</span>(yearID, teamID, G, W, RA, <span class="at">RS=</span>R) <span class="sc">|&gt;</span></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">filter</span>(teamID <span class="sc">==</span> <span class="st">&quot;NYN&quot;</span> <span class="sc">&amp;</span> yearID <span class="sc">%in%</span> <span class="dv">2004</span><span class="sc">:</span><span class="dv">2012</span>)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>mets_ben</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS
+1   2004    NYN 162 71 731 684
+2   2005    NYN 162 83 648 722
+3   2006    NYN 162 97 731 834
+4   2007    NYN 162 88 750 804
+5   2008    NYN 162 89 715 799
+6   2009    NYN 162 70 757 671
+7   2010    NYN 162 79 652 656
+8   2011    NYN 162 77 742 718
+9   2012    NYN 162 74 709 650</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-4" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-4">Exercise 4</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="ot">&lt;-</span> mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>( <span class="at">WPct =</span> W<span class="sc">/</span>G )</span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>mets_ben</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct
+1   2004    NYN 162 71 731 684 0.4382716
+2   2005    NYN 162 83 648 722 0.5123457
+3   2006    NYN 162 97 731 834 0.5987654
+4   2007    NYN 162 88 750 804 0.5432099
+5   2008    NYN 162 89 715 799 0.5493827
+6   2009    NYN 162 70 757 671 0.4320988
+7   2010    NYN 162 79 652 656 0.4876543
+8   2011    NYN 162 77 742 718 0.4753086
+9   2012    NYN 162 74 709 650 0.4567901</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="ot">&lt;-</span> mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">WPct_hat =</span> <span class="dv">1</span> <span class="sc">/</span> (<span class="dv">1</span> <span class="sc">+</span> (RA<span class="sc">/</span>RS)<span class="sc">^</span><span class="dv">2</span>))</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>mets_ben</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct  WPct_hat
+1   2004    NYN 162 71 731 684 0.4382716 0.4668211
+2   2005    NYN 162 83 648 722 0.5123457 0.5538575
+3   2006    NYN 162 97 731 834 0.5987654 0.5655308
+4   2007    NYN 162 88 750 804 0.5432099 0.5347071
+5   2008    NYN 162 89 715 799 0.5493827 0.5553119
+6   2009    NYN 162 70 757 671 0.4320988 0.4399936
+7   2010    NYN 162 79 652 656 0.4876543 0.5030581
+8   2011    NYN 162 77 742 718 0.4753086 0.4835661
+9   2012    NYN 162 74 709 650 0.4567901 0.4566674</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="ot">&lt;-</span> mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">W_hat =</span> WPct_hat <span class="sc">*</span> G )</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>mets_ben</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct  WPct_hat    W_hat
+1   2004    NYN 162 71 731 684 0.4382716 0.4668211 75.62501
+2   2005    NYN 162 83 648 722 0.5123457 0.5538575 89.72491
+3   2006    NYN 162 97 731 834 0.5987654 0.5655308 91.61600
+4   2007    NYN 162 88 750 804 0.5432099 0.5347071 86.62255
+5   2008    NYN 162 89 715 799 0.5493827 0.5553119 89.96053
+6   2009    NYN 162 70 757 671 0.4320988 0.4399936 71.27896
+7   2010    NYN 162 79 652 656 0.4876543 0.5030581 81.49541
+8   2011    NYN 162 77 742 718 0.4753086 0.4835661 78.33771
+9   2012    NYN 162 74 709 650 0.4567901 0.4566674 73.98012</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-5" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-5">Exercise 5</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(mets_ben, W <span class="sc">&gt;=</span> W_hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct  WPct_hat    W_hat
+1   2006    NYN 162 97 731 834 0.5987654 0.5655308 91.61600
+2   2007    NYN 162 88 750 804 0.5432099 0.5347071 86.62255
+3   2012    NYN 162 74 709 650 0.4567901 0.4566674 73.98012</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">filter</span>(mets_ben, W <span class="sc">&lt;</span> W_hat)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct  WPct_hat    W_hat
+1   2004    NYN 162 71 731 684 0.4382716 0.4668211 75.62501
+2   2005    NYN 162 83 648 722 0.5123457 0.5538575 89.72491
+3   2008    NYN 162 89 715 799 0.5493827 0.5553119 89.96053
+4   2009    NYN 162 70 757 671 0.4320988 0.4399936 71.27896
+5   2010    NYN 162 79 652 656 0.4876543 0.5030581 81.49541
+6   2011    NYN 162 77 742 718 0.4753086 0.4835661 78.33771</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-6" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>dplyr<span class="sc">::</span><span class="fu">arrange</span>(mets_ben, <span class="fu">desc</span>(WPct))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct  WPct_hat    W_hat
+1   2006    NYN 162 97 731 834 0.5987654 0.5655308 91.61600
+2   2008    NYN 162 89 715 799 0.5493827 0.5553119 89.96053
+3   2007    NYN 162 88 750 804 0.5432099 0.5347071 86.62255
+4   2005    NYN 162 83 648 722 0.5123457 0.5538575 89.72491
+5   2010    NYN 162 79 652 656 0.4876543 0.5030581 81.49541
+6   2011    NYN 162 77 742 718 0.4753086 0.4835661 78.33771
+7   2012    NYN 162 74 709 650 0.4567901 0.4566674 73.98012
+8   2004    NYN 162 71 731 684 0.4382716 0.4668211 75.62501
+9   2009    NYN 162 70 757 671 0.4320988 0.4399936 71.27896</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-7" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
-<p>…</p>
 </section>
 <section id="exercise-8" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-8">Exercise 8</h3>

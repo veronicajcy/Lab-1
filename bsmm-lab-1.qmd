@@ -15,6 +15,7 @@ Load packages and data:
 ```{r load-pkg-data}
 #| message: false
 library(Lahman)
+dim(Teams)
 ```
 
 ## Exercises
@@ -42,32 +43,48 @@ my_mets
 
 ```{r}
 mets_ben <- Teams |>
-  dplyr::select(yearID, teamID, G, RA, RS=R) |>
+  dplyr::select(yearID, teamID, G, W, RA, RS=R) |>
   dplyr::filter(teamID == "NYN" & yearID %in% 2004:2012)
-mets_ben
-```
-
-```{r}
-mets_ben <- mets_ben |>
-  dplyr::rename(Rs = R)    # new name = old name
 mets_ben
 ```
 
 ### Exercise 4
 
-...
+```{r}
+mets_ben <- mets_ben |>
+  dplyr::mutate( WPct = W/G )
+mets_ben
+```
+
+```{r}
+mets_ben <- mets_ben |>
+  dplyr::mutate(WPct_hat = 1 / (1 + (RA/RS)^2))
+mets_ben
+```
+
+```{r}
+mets_ben <- mets_ben |>
+  dplyr::mutate(W_hat = WPct_hat * G )
+mets_ben
+```
 
 ### Exercise 5
 
-...
+```{r}
+dplyr::filter(mets_ben, W >= W_hat)
+```
+
+```{r}
+dplyr::filter(mets_ben, W < W_hat)
+```
 
 ### Exercise 6
 
-...
+```{r}
+dplyr::arrange(mets_ben, desc(WPct))
+```
 
 ### Exercise 7
-
-...
 
 ### Exercise 8
 
