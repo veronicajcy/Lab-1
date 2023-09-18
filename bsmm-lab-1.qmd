@@ -29,11 +29,29 @@ The `Teams` dataset has 3015 observations and 48 variables.
 
 ### Exercise 2
 
-...
+```{r}
+mets <- Teams  |> 
+  dplyr::filter(teamID == "NYN")
+my_mets <- mets |> 
+  dplyr::filter(yearID %in% 2004:2012) |> 
+  dplyr::select(yearID,G,W,L)
+my_mets
+```
 
 ### Exercise 3
 
-...
+```{r}
+mets_ben <- Teams |>
+  dplyr::select(yearID, teamID, G, RA, RS=R) |>
+  dplyr::filter(teamID == "NYN" & yearID %in% 2004:2012)
+mets_ben
+```
+
+```{r}
+mets_ben <- mets_ben |>
+  dplyr::rename(Rs = R)    # new name = old name
+mets_ben
+```
 
 ### Exercise 4
 
