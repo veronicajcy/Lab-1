@@ -78,22 +78,70 @@ dplyr::filter(mets_ben, W >= W_hat)
 dplyr::filter(mets_ben, W < W_hat)
 ```
 
+Mets were better than expected in 3 seasons, and worse than expected in 6 seasons.
+
 ### Exercise 6
 
 ```{r}
 dplyr::arrange(mets_ben, desc(WPct))
 ```
 
+The best season was in 2006.
+
 ### Exercise 7
+
+```{r}
+mets_ben |>
+  dplyr::mutate(Diff = W - W_hat) |>
+  dplyr::arrange(desc(Diff))
+```
 
 ### Exercise 8
 
-...
+```{r}
+mets_ben |>
+  skim(W)
+   
+```
+
+```{r}
+mets_ben |>
+  dplyr::summarize(
+    num_years = 9, 
+    total_W = sum(W), 
+    total_L = sum(G-W), 
+    total_WPct = sum(W)/sum(G), 
+    sum_resid = sum(W - W_hat)
+  )
+```
+
+In these 9 years, the Mets had a combined record of 728 wins and 730 losses. The overall winning percentage was 49.93%.
 
 ### Exercise 9
 
-...
-
 ### Exercise 10
 
-...
+```{r}
+mets_ben <- mets_ben |>
+  dplyr::mutate(
+    gm = ifelse(
+      yearID == 2004, "Duquette", 
+      ifelse(
+        yearID >= 2011, "Alderson", "Minaya")
+    )
+  )
+```
+
+### Exercise 11
+
+```{r}
+mets_ben |> 
+ dplyr::group_by(gm) |>
+ dplyr::summarize(
+    num_years = 9, 
+    total_W = sum(W), 
+    total_L = sum(G-W), 
+    total_WPct = sum(W) / sum(G), 
+    sum_resid = sum(W - W_hat)
+  ) 
+```
