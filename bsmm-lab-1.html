@@ -3246,6 +3246,7 @@ $ teamIDretro    &lt;chr&gt; &quot;BS1&quot;, &quot;CH1&quot;, &quot;CL1&quot;, 
 6   2011    NYN 162 77 742 718 0.4753086 0.4835661 78.33771</code></pre>
 </div>
 </div>
+<p>Mets were better than expected in 3 seasons, and worse than expected in 6 seasons.</p>
 </section>
 <section id="exercise-6" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-6">Exercise 6</h3>
@@ -3264,21 +3265,130 @@ $ teamIDretro    &lt;chr&gt; &quot;BS1&quot;, &quot;CH1&quot;, &quot;CL1&quot;, 
 9   2009    NYN 162 70 757 671 0.4320988 0.4399936 71.27896</code></pre>
 </div>
 </div>
+<p>The best season was in 2006.</p>
 </section>
 <section id="exercise-7" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-7">Exercise 7</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(<span class="at">Diff =</span> W <span class="sc">-</span> W_hat) <span class="sc">|&gt;</span></span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">arrange</span>(<span class="fu">desc</span>(Diff))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  yearID teamID   G  W  RA  RS      WPct  WPct_hat    W_hat        Diff
+1   2006    NYN 162 97 731 834 0.5987654 0.5655308 91.61600  5.38400315
+2   2007    NYN 162 88 750 804 0.5432099 0.5347071 86.62255  1.37744558
+3   2012    NYN 162 74 709 650 0.4567901 0.4566674 73.98012  0.01988152
+4   2008    NYN 162 89 715 799 0.5493827 0.5553119 89.96053 -0.96052803
+5   2009    NYN 162 70 757 671 0.4320988 0.4399936 71.27896 -1.27895513
+6   2011    NYN 162 77 742 718 0.4753086 0.4835661 78.33771 -1.33770571
+7   2010    NYN 162 79 652 656 0.4876543 0.5030581 81.49541 -2.49540821
+8   2004    NYN 162 71 731 684 0.4382716 0.4668211 75.62501 -4.62501135
+9   2005    NYN 162 83 648 722 0.5123457 0.5538575 89.72491 -6.72490937</code></pre>
+</div>
+</div>
 </section>
 <section id="exercise-8" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-8">Exercise 8</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>  mdsr<span class="sc">::</span><span class="fu">skim</span>(W)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<p><strong>Variable type: numeric</strong></p>
+<table class="table table-sm table-striped small">
+<thead>
+<tr class="header">
+<th style="text-align: left;">var</th>
+<th style="text-align: right;">n</th>
+<th style="text-align: right;">na</th>
+<th style="text-align: right;">mean</th>
+<th style="text-align: right;">sd</th>
+<th style="text-align: right;">p0</th>
+<th style="text-align: right;">p25</th>
+<th style="text-align: right;">p50</th>
+<th style="text-align: right;">p75</th>
+<th style="text-align: right;">p100</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">W</td>
+<td style="text-align: right;">9</td>
+<td style="text-align: right;">0</td>
+<td style="text-align: right;">80.89</td>
+<td style="text-align: right;">9.1</td>
+<td style="text-align: right;">70</td>
+<td style="text-align: right;">74</td>
+<td style="text-align: right;">79</td>
+<td style="text-align: right;">88</td>
+<td style="text-align: right;">97</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_years =</span> <span class="dv">9</span>, </span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_W =</span> <span class="fu">sum</span>(W), </span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_L =</span> <span class="fu">sum</span>(G<span class="sc">-</span>W), </span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_WPct =</span> <span class="fu">sum</span>(W)<span class="sc">/</span><span class="fu">sum</span>(G), </span>
+<span id="cb24-7"><a href="#cb24-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">sum_resid =</span> <span class="fu">sum</span>(W <span class="sc">-</span> W_hat)</span>
+<span id="cb24-8"><a href="#cb24-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  num_years total_W total_L total_WPct sum_resid
+1         9     728     730  0.4993141 -10.64119</code></pre>
+</div>
+</div>
+<p>In these 9 years, the Mets had a combined record of 728 wins and 730 losses. The overall winning percentage was 49.93%.</p>
 </section>
 <section id="exercise-9" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-9">Exercise 9</h3>
-<p>…</p>
 </section>
 <section id="exercise-10" class="level3">
 <h3 class="anchored" data-anchor-id="exercise-10">Exercise 10</h3>
-<p>…</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="ot">&lt;-</span> mets_ben <span class="sc">|&gt;</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">gm =</span> <span class="fu">ifelse</span>(</span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>      yearID <span class="sc">==</span> <span class="dv">2004</span>, <span class="st">&quot;Duquette&quot;</span>, </span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>      <span class="fu">ifelse</span>(</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a>        yearID <span class="sc">&gt;=</span> <span class="dv">2011</span>, <span class="st">&quot;Alderson&quot;</span>, <span class="st">&quot;Minaya&quot;</span>)</span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="ot">&lt;-</span> mets_ben <span class="sc">|&gt;</span> </span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>  dplyr<span class="sc">::</span><span class="fu">mutate</span>(</span>
+<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="at">gm =</span> dplyr<span class="sc">::</span><span class="fu">case_when</span>(</span>
+<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>      yearID <span class="sc">==</span> <span class="dv">2004</span> <span class="sc">~</span> <span class="st">&quot;Duquette&quot;</span>, </span>
+<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a>      yearID <span class="sc">&gt;=</span> <span class="dv">2011</span> <span class="sc">~</span> <span class="st">&quot;Alderson&quot;</span>, </span>
+<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a>      <span class="cn">TRUE</span> <span class="sc">~</span> <span class="st">&quot;Minaya&quot;</span></span>
+<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a>  )</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="exercise-11" class="level3">
+<h3 class="anchored" data-anchor-id="exercise-11">Exercise 11</h3>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>mets_ben <span class="sc">|&gt;</span> </span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a> dplyr<span class="sc">::</span><span class="fu">group_by</span>(gm) <span class="sc">|&gt;</span></span>
+<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a> dplyr<span class="sc">::</span><span class="fu">summarize</span>(</span>
+<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">num_years =</span> <span class="dv">9</span>, </span>
+<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_W =</span> <span class="fu">sum</span>(W), </span>
+<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_L =</span> <span class="fu">sum</span>(G<span class="sc">-</span>W), </span>
+<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a>    <span class="at">total_WPct =</span> <span class="fu">sum</span>(W) <span class="sc">/</span> <span class="fu">sum</span>(G), </span>
+<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>    <span class="at">sum_resid =</span> <span class="fu">sum</span>(W <span class="sc">-</span> W_hat)</span>
+<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a>  ) </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 3 × 6
+  gm       num_years total_W total_L total_WPct sum_resid
+  &lt;chr&gt;        &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;      &lt;dbl&gt;     &lt;dbl&gt;
+1 Alderson         9     151     173      0.466     -1.32
+2 Duquette         9      71      91      0.438     -4.63
+3 Minaya           9     506     466      0.521     -4.70</code></pre>
+</div>
+</div>
 </section>
 </section>
 

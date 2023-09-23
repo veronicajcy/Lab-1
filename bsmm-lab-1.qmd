@@ -100,8 +100,7 @@ mets_ben |>
 
 ```{r}
 mets_ben |>
-  skim(W)
-   
+  mdsr::skim(W)
 ```
 
 ```{r}
@@ -128,6 +127,17 @@ mets_ben <- mets_ben |>
       yearID == 2004, "Duquette", 
       ifelse(
         yearID >= 2011, "Alderson", "Minaya")
+    )
+  )
+```
+
+```{r}
+mets_ben <- mets_ben |> 
+  dplyr::mutate(
+    gm = dplyr::case_when(
+      yearID == 2004 ~ "Duquette", 
+      yearID >= 2011 ~ "Alderson", 
+      TRUE ~ "Minaya"
     )
   )
 ```
